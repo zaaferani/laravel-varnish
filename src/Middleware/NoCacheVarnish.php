@@ -16,7 +16,7 @@ class NoCacheVarnish
      */
     public function handle($request, Closure $next)
     {
-        $max_age = config('varnish.cache_time_in_minutes');
+        $max_age = config('varnish.cache_time_in_minutes') * 60;
         header('Set-Cookie: x-random=' . time() . " path=" . $request->path() . " Max-Age=$max_age");
         return $next($request);
     }
